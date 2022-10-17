@@ -37,7 +37,7 @@ void DArray::Reallocate() {
   size_t new_buf_size = buf_size_ * 2;
   auto new_buffer = new double[new_buf_size];
   memcpy(new_buffer, buffer_, buf_size_ * sizeof(double));
-  // TODO: case 1 - memleak
+
   delete[] buffer_;
   buf_size_ = new_buf_size;
   buffer_ = new_buffer;

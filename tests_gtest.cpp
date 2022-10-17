@@ -108,3 +108,63 @@ TEST_P(DArrayTest, Size) {
 INSTANTIATE_TEST_SUITE_P(All,
                          DArrayTest,
                          ::testing::Values(0ULL, 100ULL, 1000ULL));
+INSTANTIATE_TEST_SUITE_P(All5,
+                         DArrayTest,
+                         ::testing::Values(5ULL, 500ULL, 5000ULL));
+
+
+class UrlData {
+ public:
+  UrlData& append(UrlData&&) {
+    // impl
+    return *this;
+  }
+};
+
+class URLService {
+ public:
+  // example.com/test?date=2021-10-28&time=10:12
+  UrlData Parse(const std::string& url) {
+    // impl
+    UrlData result;
+    // impl
+    result.append(ParseDate(url)).append(ParseTime(url));
+    // impl
+    return result;
+  }
+
+ private:
+  // &date=2021-10-28
+  UrlData ParseDate(const std::string& url) {
+    // impl
+    return UrlData(/*impl*/);
+  }
+
+  // &time=10:12
+  UrlData ParseTime(const std::string& url) {
+    // impl
+    return UrlData(/*impl*/);
+  }
+};
+
+
+
+
+
+
+
+
+
+namespace utils {
+// &date=2021-10-28
+UrlData ParseDate(const std::string& url) {
+  // impl
+  return UrlData(/*impl*/);
+}
+
+// &time=10:12
+UrlData ParseTime(const std::string& url) {
+  // impl
+  return UrlData(/*impl*/);
+}
+}  // namespace utils

@@ -7,8 +7,7 @@ using ::testing::DoAll;
 using ::testing::Return;
 using ::testing::SetArgReferee;
 
-class Report {
-};
+class Report {};
 
 class IReporter {
  public:
@@ -83,6 +82,7 @@ class Reporter : public IReporter {
     if (reports.empty())
       throw std::runtime_error("reports list is empty");
     for (const Report& report : reports) {
+      // if 
       report_sender_->Send(report);
     }
   }
@@ -91,7 +91,6 @@ class Reporter : public IReporter {
   IReportBuilder* report_builder_ = nullptr;
   IReportSender* report_sender_ = nullptr;
 };
-
 
 /// TEST
 

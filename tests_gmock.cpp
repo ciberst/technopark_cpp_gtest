@@ -39,11 +39,17 @@ TEST(PainterTest, CanDrawSomething) {
   EXPECT_TRUE(painter.DrawCircle(0, 0, 10));
 }
 
+//class MockDArray : public DArray {
+// public:
+//  explicit MockDArray(size_t buffer_size) : DArray(buffer_size){};
+//  MOCK_METHOD0(Reallocate, void());
+//};
+
 class MockDArray : public DArray {
  public:
   explicit MockDArray(size_t buffer_size) : DArray(buffer_size){};
-  //MOCK_METHOD0(Reallocate, void());
   MOCK_METHOD0(DoReallocate, void());
+  // void DoReallocate() {}
 
  private:
   void Reallocate() override {
@@ -55,7 +61,7 @@ class MockDArray : public DArray {
 TEST(DynamicArrayTest, ReallocateCalledOnce) {
   const int kCount = 2;
   MockDArray mockdarray{kCount};
-  // EXPECT_CALL(mockdarray, Reallocate()).Times(AtLeast(1));
+  //EXPECT_CALL(mockdarray, Reallocate()).Times(AtLeast(1));
   EXPECT_CALL(mockdarray, DoReallocate()).Times(AtLeast(1));
   ASSERT_EQ(mockdarray.Capacity(), kCount);
   mockdarray.PushBack(5);
@@ -80,7 +86,7 @@ class MockPacketStream {
   // MOCK_METHOD(const Packet*, GetPacket, (size_t packet_number), (const));
   // MOCK_METHOD(size_t, NumberOfPackets, (), (const));
 
-  MOCK_METHOD1(GetPacket, const Packet*(size_t packet_number));
+  MOCK_CONST_METHOD1(GetPacket, const Packet*(size_t packet_number));
   MOCK_CONST_METHOD0(NumberOfPackets, size_t());
 };
 
@@ -128,7 +134,9 @@ class ClientFileInterface {
 
   bool DoRead() {
     int mode = 0;
-    return fi_->Open(kEmptyStr, mode);
+    const bool result = fi_->Open(kEmptyStr, mode);
+    std::cout << "mode: "  << mode << std::endl;
+    return result;
   }
 
   FileInterface* fi_ = nullptr;
