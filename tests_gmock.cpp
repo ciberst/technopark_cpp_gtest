@@ -16,7 +16,8 @@ class Turtle {
 
 class MockTurtle : public Turtle {
  public:
-  MOCK_METHOD0(PenDown, void());
+  // MOCK_METHOD0(PenDown, void());
+  MOCK_METHOD(void, PenDown, (), (override));
 };
 
 class Painter {

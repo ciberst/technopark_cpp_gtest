@@ -5,6 +5,8 @@
 Queue::Queue(size_t queue_size)
     : buffer_(nullptr), queue_size_(queue_size), head_(0), tail_(0) {
   buffer_ = (int*)malloc(queue_size_ * sizeof(int));
+  if (!buffer_)
+    throw std::bad_alloc();
   // buffer_ = (int*)malloc(queue_size_);
   // TODO: case 3 - invalid read/write
   memset(buffer_, 0, sizeof(decltype(buffer_[0])) * queue_size);

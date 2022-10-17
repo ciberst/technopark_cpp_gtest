@@ -52,11 +52,11 @@ class EmailReportSender : public IReportSender {
   }
 };
 
-class BadReporter : public IReporter {
+class BadReporter {
  public:
-  ~BadReporter() override = default;
+  ~BadReporter() = default;
 
-  void SendReports() override {
+  void SendReports() {
     IReportBuilder* reportBuilder = new ReportBuilder();
     std::vector<Report> reports = reportBuilder->CreateReports();
     if (reports.empty())

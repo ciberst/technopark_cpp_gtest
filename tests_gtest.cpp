@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
 #include "DArray.h"
@@ -52,7 +51,7 @@ TEST(QueueTest, Pop) {
 }
 
 class ArrayTest : public ::testing::Test {
- protected:
+ public:
   void SetUp() override {
     std::cerr << "ArrayTest::SetUp()" << std::endl;
     a0_.PushBack(1);
@@ -88,7 +87,7 @@ TEST_P(DArrayTest, Size) {
   const size_t count = GetParam();
   DArray array;
   for (size_t i = 0; i < count; ++i) {
-    array.PushBack(i);
+    array.PushBack(static_cast<double>(i));
   }
   EXPECT_EQ(array.Size(), count);
 
@@ -105,12 +104,22 @@ TEST_P(DArrayTest, Size) {
   EXPECT_TRUE(array.IsEmpty());
 }
 
+// disable test
+// enable after fix
+TEST(Test, DISABLED_Test) {
+  EXPECT_TRUE(false);
+}
+
 INSTANTIATE_TEST_SUITE_P(All,
                          DArrayTest,
                          ::testing::Values(0ULL, 100ULL, 1000ULL));
 INSTANTIATE_TEST_SUITE_P(All5,
                          DArrayTest,
                          ::testing::Values(5ULL, 500ULL, 5000ULL));
+
+
+
+
 
 
 class UrlData {

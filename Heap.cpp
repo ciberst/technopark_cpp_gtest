@@ -34,7 +34,7 @@ void SiftUp(DArray& arr, size_t i) {
 
 // http://en.cppreference.com/w/cpp/algorithm/make_heap
 void MakeHeap(DArray& arr) {
-  for (int i = arr.Size() / 2 - 1; i >= 0; --i) {
+  for (int i = static_cast<int>(arr.Size()) / 2 - 1; i >= 0; --i) {
     SiftDown(arr, i);
   }
 }
